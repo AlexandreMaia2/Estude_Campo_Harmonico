@@ -34,14 +34,15 @@ class Oct8Route{
         let Gethash = window.location.hash
             Gethash = Gethash.toLowerCase()
             let foundStatus = null
+            let flag_initial =false
             this.Routes.forEach(element => {
                 //console.log(element["Route"][0]+" "+Gethash.replace("#",''))
-                if(window.location.hash == ''){
-                    
-                    if(this.Routes["/"] != undefined){
-                        this.Routes["/"][0]()
-                    }
-                    return 0 
+                console.log(Gethash+" "+element["Route"][0].toLowerCase())
+                if(window.location.hash == '' && element["Route"][0].toLowerCase() == "/"){
+                    element["Route"][1]()
+                    this.NotFoundStatus = true
+                    foundStatus = true
+                    return 0
                 }
                 if(Gethash.replace("#",'') == element["Route"][0].toLowerCase() && !element["Route"][0].includes("/:"))
                 {
